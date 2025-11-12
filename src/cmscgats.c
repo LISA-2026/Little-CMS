@@ -839,7 +839,7 @@ void InSymbol(cmsIT8* it8)
 
         if (isfirstidchar(it8->ch)) {          // Identifier
 
-            StringClear(it8->id);
+           // StringClear(it8->id);
 
             do {
 
