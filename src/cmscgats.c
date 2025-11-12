@@ -2058,10 +2058,12 @@ cmsBool CMSEXPORT cmsIT8SaveToMem(cmsHANDLE hIT8, void *MemPtr, cmsUInt32Number*
 
     sd.Used = 0;
 
-    if (sd.Base && (*BytesNeeded > 0)) {
+    if (sd.Base)
+        sd.Max  = *BytesNeeded; 
+    // if (sd.Base && (*BytesNeeded > 0)) {
 
-        sd.Max = (*BytesNeeded) - 1;     // Write to memory?
-    }
+    //     sd.Max = (*BytesNeeded) - 1;     // Write to memory?
+    // }
     else
         sd.Max  = 0;                // Just counting the needed bytes
 
