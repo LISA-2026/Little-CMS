@@ -5616,12 +5616,14 @@ static
 void* Type_VideoSignal_Read(struct _cms_typehandler_struct* self, cmsIOHANDLER* io, cmsUInt32Number* nItems, cmsUInt32Number SizeOfTag)
 {
     cmsVideoSignalType* cicp = NULL;
+     if (SizeOfTag != 8) return NULL; 
 
-    if (SizeOfTag != 4) return NULL; 
+    if (!_cmsReadUInt32Number(io, NULL)) return NULL;
+    // if (SizeOfTag != 4) return NULL; 
     
     cicp = (cmsVideoSignalType*)_cmsCalloc(self->ContextID, 1, sizeof(cmsVideoSignalType));
     if (cicp == NULL) return NULL;
-
+    if (!_cmsWriteUInt32Number(io, 0)) return FALSE;
     if (!_cmsReadUInt8Number(io, &cicp->ColourPrimaries)) goto Error;
     if (!_cmsReadUInt8Number(io, &cicp->TransferCharacteristics)) goto Error;
     if (!_cmsReadUInt8Number(io, &cicp->MatrixCoefficients)) goto Error;
